@@ -4,6 +4,9 @@ from .serializers import CountrySerializer, LanguageSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models import Prefetch
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
 
 class CountryViewSet(viewsets.ModelViewSet):
@@ -49,3 +52,30 @@ class CountryViewSet(viewsets.ModelViewSet):
 class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Language.objects.all()
     serializer_class = LanguageSerializer
+
+
+
+@login_required
+def country_list_view(request):
+    query = request.GET.get("search", "")
+    countries = Country.objects.prefetch_related("languages").all()
+
+    if query:
+        countries = countries.filter(name__icontains=query)
+
+    context = {"countries": countries, "search_query": query}
+    return render(request, "countries/country_list.html", context)
+
+
+@login_required
+def country_details_view(request, pk):
+    country = get_object_or_404(Country.objects.prefetch_related("languages"), pk=pk)
+    same_region = Country.objects.filter(region=country.region).exclude(pk=pk)
+    languages = country.languages.all()
+
+    context = {
+        "country": country,
+        "same_region": same_region,
+        "languages": languages,
+    }
+    return render(request, "countries/country_details.html", context)
