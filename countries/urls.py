@@ -8,4 +8,7 @@ router.register(r'languages', LanguageViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('countries/<int:pk>/same-region/', CountryViewSet.as_view({'get': 'same_region'})),
+    path('countries/by-language-name/<str:language_name>/', CountryViewSet.as_view({'get': 'by_language_name'})),
+
 ]
