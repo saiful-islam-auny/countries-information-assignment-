@@ -1,24 +1,13 @@
-"""
-URL configuration for country_information project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
+from accounts.views import landing
+from countries.views import country_list, country_details
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('countries.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls')),  # Ensure this line is included
+    path('', landing, name='landing'),  # Landing page
+    path('countries/', country_list, name='country_list'),  # Country list page
+    path('countries/<int:id>/details/', country_details, name='country_details'),  # Country details page
 ]

@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<div class="jumbotron text-center">
+  <h1>Welcome to Country Info</h1>
+  {% if user.is_authenticated %}
+  <p>
+    You are logged in.
+    <a href="{% url 'country_list' %}" class="btn btn-primary"
+      >Go to Country List</a
+    >
+  </p>
+  {% else %}
+  <p>You must be logged in to access country information.</p>
+  <p>
+    <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-success">Register</a>
+  </p>
+  {% endif %}
+</div>
+{% endblock %}

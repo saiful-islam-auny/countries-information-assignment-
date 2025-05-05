@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block content %}
+<h2 class="mt-5">Login</h2>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="id_username" class="form-label">Username</label>
+    <input
+      type="text"
+      name="username"
+      class="form-control"
+      id="id_username"
+      required
+      value="saiful"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="id_password" class="form-label">Password</label>
+    <input
+      type="password"
+      name="password"
+      class="form-control"
+      id="id_password"
+      required
+      value="auny1234"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'register' %}">Register here</a>.</p>
+{% endblock %}
