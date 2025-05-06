@@ -74,19 +74,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'country_information.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# ---------------------------------------------
+# DATABASE CONFIGURATION
+# ---------------------------------------------
+# This section sets up the connection to the PostgreSQL database
+# required by the Django project to store and manage application data.
+# Update these settings according to your local or production environment.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'country-db',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',  # Specifies PostgreSQL as the database engine
+        'NAME': 'country-db',                       
+        'USER': 'postgres',                         
+        'PASSWORD': '1234',                         
+        'HOST': 'localhost',                       
+        'PORT': '5432',                             
     }
 }
+
 
 
 # Password validation
