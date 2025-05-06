@@ -33,3 +33,105 @@ venv\Scripts\activate  # For Windows
 
 # Install dependencies
 pip install -r requirements.txt
+```
+
+---
+
+## 2. ⚙️ Dependencies
+
+The project relies on the following key packages:
+
+- **Django==4.2**
+- **djangorestframework==3.14.0**
+- **psycopg2-binary==2.9.9** – PostgreSQL adapter
+- **requests==2.31.0** – To fetch country data from external API
+- **Bootstrap (via CDN)** – Used for frontend styling
+
+> All dependencies are listed in the `requirements.txt` file.
+
+---
+
+## 3. 🛠️ Database Setup (PostgreSQL)
+
+Make sure PostgreSQL is installed and running.
+
+### Create Database:
+
+```sql
+# Open PostgreSQL shell or use a GUI like pgAdmin
+CREATE DATABASE country_db;
+```
+### Configure `settings.py`:
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'country_db',
+        'USER': 'postgres',        # Change if needed
+        'PASSWORD': '1234',        # Change if needed
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
+
+---
+
+## 4.🧱 Migrations & Data Load:
+```
+# Run migrations
+python manage.py makemigrations
+python manage.py migrate
+```
+### Option A: Load dummy data from file
+```
+python manage.py loaddata data.json  #data.json is included in the repo and contains sample country and language data.
+```
+### Option B: Fetch data from REST API
+```
+python manage.py fetch_countries  #This will call the REST Countries API and populate the database with real-time data.
+```
+
+---
+
+## 5. 👤 Create Superuser (for admin access)
+```
+python manage.py createsuperuser
+```
+### 6. 🚦 Run the Development Server
+```
+python manage.py runserver
+# Then go to http://127.0.0.1:8000 in your browser.
+```
+
+---
+
+## 🔗 Key Endpoints
+http://127.0.0.1:8000/ - Landing Page
+http://127.0.0.1:8000/accounts/register/ - Register
+http://127.0.0.1:8000/accounts/login/ - Login
+http://127.0.0.1:8000/countries/ - Country List (with search)
+http://127.0.0.1:8000/api/countries/ - Country API
+http://127.0.0.1:8000/api/countries/{id}/same-region/ - Countries in same region
+http://127.0.0.1:8000/api/countries/by-language-name/english/ - Filter by language
+
+---
+
+##🗃️ Project Structure Overview
+country_information/
+├── accounts/           # Authentication app
+├── countries/          # Country & language models and views
+├── templates/          # HTML templates
+├── data.json           # Preloaded sample data
+├── manage.py
+├── requirements.txt
+└── README.md
+
+---
+
+## 📞 Contact
+
+For any questions, feedback, or follow-ups, feel free to reach out via:
+
+- Email: [aunychowdhury99@gmail.com](mailto:aunychowdhury99@gmail.com)
+- LinkedIn: [Saiful Islam Auny](https://www.linkedin.com/in/saiful-islam-auny/)
