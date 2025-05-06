@@ -58,15 +58,27 @@ Make sure PostgreSQL is installed and running.
 ### Create Database:
 
 ```sql
-# Open PostgreSQL shell or use a GUI like pgAdmin
-CREATE DATABASE country_db;
+# Log into PostgreSQL
+psql -U postgres
+
+-- Create the database
+CREATE DATABASE "country-db";
+
+-- (Optional) Create a new user if you don’t want to use 'postgres'
+CREATE USER myuser WITH PASSWORD 'mypassword';
+
+-- (Optional) Grant privileges
+GRANT ALL PRIVILEGES ON DATABASE "country-db" TO myuser;
+
+-- Exit the shell
+\q
 ```
 ### Configure `settings.py`:
 ```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'country_db',
+        'NAME': 'country-db',
         'USER': 'postgres',        # Change if needed
         'PASSWORD': '1234',        # Change if needed
         'HOST': 'localhost',
@@ -83,11 +95,7 @@ DATABASES = {
 python manage.py makemigrations
 python manage.py migrate
 ```
-### Option A: Load dummy data from file
-```bash
-python manage.py loaddata data.json  #data.json is included in the repo and contains sample country and language data.
-```
-### Option B: Fetch data from REST API
+### Fetch data from REST API
 ```bash
 python manage.py fetch_countries  #This will call the REST Countries API and populate the database with real-time data.
 ```
@@ -101,9 +109,8 @@ python manage.py createsuperuser
 ### 6. 🚦 Run the Development Server
 ```bash
 python manage.py runserver
-# Then go to http://127.0.0.1:8000 in your browser.
 ```
-
+Then go to http://127.0.0.1:8000 in your browser.
 ---
 
 ## 🔑 Key Endpoints
@@ -115,22 +122,34 @@ Here are the key API endpoints for the project:
 - **Description**: Returns a list of all countries.
 - **Query Parameters**: `search` (optional) - Search for a country by name.
 
+- **Method**: `POST`
+- **Description**: Create a new country. Requires authentication and valid language IDs.
+
 ### 2. `/api/countries/{id}/`
 - **Method**: `GET`
 - **Description**: Get details of a specific country by `id`.
-  
+
+- **Method**: `PUT` / `PATCH`
+- **Description**: Update a specific country's details.
+
+- **Method**: `DELETE`
+- **Description**: Delete a specific country.
+
 ### 3. `/api/countries/{id}/same-region/`
 - **Method**: `GET`
 - **Description**: Get countries from the same region as the specified country.
-  
-### 4. `/api/countries/by-language-name/{language_name}/`
+
+### 4. `/api/countries/{id}/regional/`
+- **Method**: `GET`
+- **Description**: Another custom action to retrieve countries in the same region.
+
+### 5. `/api/countries/by-language-name/{language_name}/`
 - **Method**: `GET`
 - **Description**: Get a list of countries that speak the specified language.
 
-### 5. `/api/languages/`
+### 6. `/api/languages/`
 - **Method**: `GET`
 - **Description**: Get a list of all languages in the database.
-
 
 ---
 
