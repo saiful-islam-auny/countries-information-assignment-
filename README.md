@@ -1,6 +1,6 @@
 # 🌍 Country Information App
 
-This Django-based web application fetches and displays information about countries using the [REST Countries API](https://restcountries.com). It supports user authentication, a searchable web interface, and a RESTful API for country data.
+This Django-based web application fetches and displays information about countries using the [REST Countries API](https://restcountries.com/v3.1/all). It supports user authentication, a searchable web interface, and a RESTful API for country data.
 
 ---
 
