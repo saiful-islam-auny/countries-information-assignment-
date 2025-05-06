@@ -78,46 +78,64 @@ DATABASES = {
 ---
 
 ## 4.🧱 Migrations & Data Load:
-```
+```bash
 # Run migrations
 python manage.py makemigrations
 python manage.py migrate
 ```
 ### Option A: Load dummy data from file
-```
+```bash
 python manage.py loaddata data.json  #data.json is included in the repo and contains sample country and language data.
 ```
 ### Option B: Fetch data from REST API
-```
+```bash
 python manage.py fetch_countries  #This will call the REST Countries API and populate the database with real-time data.
 ```
 
 ---
 
 ## 5. 👤 Create Superuser (for admin access)
-```
+```bash
 python manage.py createsuperuser
 ```
 ### 6. 🚦 Run the Development Server
-```
+```bash
 python manage.py runserver
 # Then go to http://127.0.0.1:8000 in your browser.
 ```
 
 ---
 
-## 🔗 Key Endpoints
-http://127.0.0.1:8000/ - Landing Page
-http://127.0.0.1:8000/accounts/register/ - Register
-http://127.0.0.1:8000/accounts/login/ - Login
-http://127.0.0.1:8000/countries/ - Country List (with search)
-http://127.0.0.1:8000/api/countries/ - Country API
-http://127.0.0.1:8000/api/countries/{id}/same-region/ - Countries in same region
-http://127.0.0.1:8000/api/countries/by-language-name/english/ - Filter by language
+## 🔑 Key Endpoints
+
+Here are the key API endpoints for the project:
+
+### 1. `/api/countries/`
+- **Method**: `GET`
+- **Description**: Returns a list of all countries.
+- **Query Parameters**: `search` (optional) - Search for a country by name.
+
+### 2. `/api/countries/{id}/`
+- **Method**: `GET`
+- **Description**: Get details of a specific country by `id`.
+  
+### 3. `/api/countries/{id}/same-region/`
+- **Method**: `GET`
+- **Description**: Get countries from the same region as the specified country.
+  
+### 4. `/api/countries/by-language-name/{language_name}/`
+- **Method**: `GET`
+- **Description**: Get a list of countries that speak the specified language.
+
+### 5. `/api/languages/`
+- **Method**: `GET`
+- **Description**: Get a list of all languages in the database.
+
 
 ---
 
-##🗃️ Project Structure Overview
+## 🗃️ Project Structure Overview
+```bash
 country_information/
 ├── accounts/           # Authentication app
 ├── countries/          # Country & language models and views
@@ -126,7 +144,7 @@ country_information/
 ├── manage.py
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## 📞 Contact
