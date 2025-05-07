@@ -28,7 +28,16 @@
       <h5>Regional Countries:</h5>
       <ul class="list-group mb-4">
         {% for regional_country in regional_countries %}
-        <li class="list-group-item">{{ regional_country.name }}</li>
+        <li class="list-group-item d-flex align-items-center">
+          <img
+            src="{{ regional_country.flag }}"
+            width="24"
+            height="16"
+            class="me-2 border"
+            alt="Flag"
+          />
+          {{ regional_country.name }}
+        </li>
         {% empty %}
         <li class="list-group-item text-muted">
           No regional countries available.
