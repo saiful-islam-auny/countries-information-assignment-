@@ -139,3 +139,7 @@ LOGIN_REDIRECT_URL = '/countries/'  # After login, redirect to the country list 
 LOGOUT_REDIRECT_URL = '/'  # After logout, redirect to the landing page
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10, 
+}

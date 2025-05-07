@@ -7,6 +7,7 @@ from django.db.models import Prefetch
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
 # --------------------------------------------------
 # CountryViewSet: Handles CRUD operations for countries
@@ -69,16 +70,26 @@ class LanguageViewSet(viewsets.ReadOnlyModelViewSet):
 # FRONTEND, For displaying country data using HTML templates
 # ----------------------------------------------------------------------
 
-def country_list(request): # Displays a list of all countries with search option, Only accessible by authenticated users
+def country_list(request):
     if not request.user.is_authenticated:
-        return redirect('login')  # Redirect to login if not authenticated
-    
+        return redirect('login')   # Redirect to login if not authenticated
+
     countries = Country.objects.all()
+
+    # Search
     search_query = request.GET.get('search', '')
     if search_query:
         countries = countries.filter(name__icontains=search_query)
-    return render(request, 'countries/country_list.html', {'countries': countries})
 
+    # PAGINATION
+    paginator = Paginator(countries, 10)  # Show 10 countries per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'countries/country_list.html', {
+        'page_obj': page_obj,
+        'search_query': search_query,
+    })
 
 def country_details(request, id): # Shows detailed info about a selected country (same region, language)
     country = get_object_or_404(Country, pk=id)
