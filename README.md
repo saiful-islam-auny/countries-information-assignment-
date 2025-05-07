@@ -13,7 +13,6 @@ This Django-based web application fetches and displays information about countri
 - Filter countries by language
 - RESTful API (with Django REST Framework)
 - PostgreSQL as the database
-- Data preloaded via `data.json` (if preferred over live fetching)
 
 ---
 
@@ -127,7 +126,7 @@ python manage.py runserver
 
 Here are the key API endpoints for the project:
 
-### 1. `/api/countries/`
+## 1. `/api/countries/`
 
 - **Method**: `GET`
 - **Description**: Returns a paginated list of all countries.
@@ -139,7 +138,7 @@ Here are the key API endpoints for the project:
 - **Method**: `POST`
 - **Description**: Create a new country. Requires authentication and valid language IDs.
 
-### 2. `/api/countries/{id}/`
+## 2. `/api/countries/{id}/`
 
 - **Method**: `GET`
 - **Description**: Get details of a specific country by `id`.
@@ -150,22 +149,22 @@ Here are the key API endpoints for the project:
 - **Method**: `DELETE`
 - **Description**: Delete a specific country.
 
-### 3. `/api/countries/{id}/same-region/`
+## 3. `/api/countries/{id}/same-region/`
 
 - **Method**: `GET`
 - **Description**: Get countries from the same region as the specified country.
 
-### 4. `/api/countries/{id}/regional/`
+## 4. `/api/countries/{id}/regional/`
 
 - **Method**: `GET`
 - **Description**: Another custom action to retrieve countries in the same region.
 
-### 5. `/api/countries/by-language-name/{language_name}/`
+## 5. `/api/countries/by-language-name/{language_name}/`
 
 - **Method**: `GET`
 - **Description**: Get a list of countries that speak the specified language.
 
-### 6. `/api/languages/`
+## 6. `/api/languages/`
 
 - **Method**: `GET`
 - **Description**: Get a list of all languages in the database.
@@ -186,7 +185,6 @@ country_information/
 ├── accounts/           # Authentication app
 ├── countries/          # Country & language models and views
 ├── templates/          # HTML templates
-├── data.json           # Preloaded sample data
 ├── manage.py
 ├── requirements.txt
 └── README.md
