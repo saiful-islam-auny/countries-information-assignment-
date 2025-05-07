@@ -178,6 +178,19 @@ The API uses limit-offset pagination for listing resources (e.g., countries):
 
 ---
 
+## 📦 API Testing with Postman
+
+A Postman collection is included in the project for easy API testing.
+
+- File: `countries-info-api.postman_collection.json`
+- Import it into Postman and set the `{{base_url}}` variable (e.g., `http://127.0.0.1:8000`).
+- Includes sample requests for all major endpoints.
+
+✅ Tested and ready for use.
+
+---
+
+
 ## 🗃️ Project Structure Overview
 
 ```bash
