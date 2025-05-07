@@ -73,7 +73,9 @@ GRANT ALL PRIVILEGES ON DATABASE "country-db" TO myuser;
 -- Exit the shell
 \q
 ```
+
 ### Configure `settings.py`:
+
 ```
 DATABASES = {
     'default': {
@@ -90,12 +92,15 @@ DATABASES = {
 ---
 
 ## 4.🧱 Migrations & Data Load:
+
 ```bash
 # Run migrations
 python manage.py makemigrations
 python manage.py migrate
 ```
+
 ### Fetch data from REST API
+
 ```bash
 python manage.py fetch_countries  #This will call the REST Countries API and populate the database with real-time data.
 ```
@@ -103,13 +108,17 @@ python manage.py fetch_countries  #This will call the REST Countries API and pop
 ---
 
 ## 5. 👤 Create Superuser (for admin access)
+
 ```bash
 python manage.py createsuperuser
 ```
+
 ### 6. 🚦 Run the Development Server
+
 ```bash
 python manage.py runserver
 ```
+
 ### Then go to http://127.0.0.1:8000 in your browser.
 
 ---
@@ -119,14 +128,19 @@ python manage.py runserver
 Here are the key API endpoints for the project:
 
 ### 1. `/api/countries/`
+
 - **Method**: `GET`
-- **Description**: Returns a list of all countries.
-- **Query Parameters**: `search` (optional) - Search for a country by name.
+- **Description**: Returns a paginated list of all countries.
+- **Query Parameters**:
+
+  - `search` (optional) — Search for a country by name.
+  - `page` (optional) — Specify the page number (e.g., `?page=2`).
 
 - **Method**: `POST`
 - **Description**: Create a new country. Requires authentication and valid language IDs.
 
 ### 2. `/api/countries/{id}/`
+
 - **Method**: `GET`
 - **Description**: Get details of a specific country by `id`.
 
@@ -137,24 +151,36 @@ Here are the key API endpoints for the project:
 - **Description**: Delete a specific country.
 
 ### 3. `/api/countries/{id}/same-region/`
+
 - **Method**: `GET`
 - **Description**: Get countries from the same region as the specified country.
 
 ### 4. `/api/countries/{id}/regional/`
+
 - **Method**: `GET`
 - **Description**: Another custom action to retrieve countries in the same region.
 
 ### 5. `/api/countries/by-language-name/{language_name}/`
+
 - **Method**: `GET`
 - **Description**: Get a list of countries that speak the specified language.
 
 ### 6. `/api/languages/`
+
 - **Method**: `GET`
 - **Description**: Get a list of all languages in the database.
+
+## 📄 Pagination
+
+The API uses limit-offset pagination for listing resources (e.g., countries):
+
+- Default page size: **10 countries per page**
+- You can navigate using the `?page=<number>` query parameter.
 
 ---
 
 ## 🗃️ Project Structure Overview
+
 ```bash
 country_information/
 ├── accounts/           # Authentication app
@@ -165,6 +191,7 @@ country_information/
 ├── requirements.txt
 └── README.md
 ```
+
 ---
 
 ## 📞 Contact
