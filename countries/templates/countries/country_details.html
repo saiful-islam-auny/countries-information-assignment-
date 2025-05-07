@@ -1,27 +1,53 @@
 {% extends 'base.html' %} {% block content %}
-<h2>{{ country.name }} Details</h2>
-<p><strong>Capital:</strong> {{ country.capital }}</p>
-<p><strong>Population:</strong> {{ country.population }}</p>
-<p><strong>Timezones:</strong> {{ country.timezones|join:", " }}</p>
-<p><strong>Flag:</strong> <img src="{{ country.flag }}" width="100" /></p>
 
-<h3>Regional Countries:</h3>
-<ul>
-  {% for regional_country in regional_countries %}
-  <li>{{ regional_country.name }}</li>
-  {% empty %}
-  <li>No regional countries available.</li>
-  {% endfor %}
-</ul>
+<div class="container mt-4">
+  <div class="card shadow rounded-4">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">{{ country.name }} Details</h3>
+    </div>
 
-<h3>Languages Spoken:</h3>
-<ul>
-  {% for language in languages %}
-  <li>{{ language.name }}</li>
-  {% endfor %}
-</ul>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>Capital:</strong> {{ country.capital }}</p>
+          <p><strong>Population:</strong> {{ country.population }}</p>
+          <p><strong>Timezones:</strong> {{ country.timezones|join:", " }}</p>
+        </div>
+        <div class="col-md-6 text-end">
+          <img
+            src="{{ country.flag }}"
+            width="150"
+            class="img-thumbnail border border-2"
+            alt="Flag"
+          />
+        </div>
+      </div>
 
-<a href="{% url 'country_list' %}" class="btn btn-secondary"
-  >Back to Country List</a
->
+      <hr />
+
+      <h5>Regional Countries:</h5>
+      <ul class="list-group mb-4">
+        {% for regional_country in regional_countries %}
+        <li class="list-group-item">{{ regional_country.name }}</li>
+        {% empty %}
+        <li class="list-group-item text-muted">
+          No regional countries available.
+        </li>
+        {% endfor %}
+      </ul>
+
+      <h5>Languages Spoken:</h5>
+      <ul class="list-group mb-4">
+        {% for language in languages %}
+        <li class="list-group-item">{{ language.name }}</li>
+        {% endfor %}
+      </ul>
+
+      <a href="{% url 'country_list' %}" class="btn btn-primary"
+        >Back to Country List</a
+      >
+    </div>
+  </div>
+</div>
+
 {% endblock %}
